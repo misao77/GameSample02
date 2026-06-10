@@ -21,6 +21,6 @@ public:
 	void Release() override;
 private:
 	int hModel_;
-
+	int camType_;//カメラの種類
 };
 
