@@ -1,14 +1,14 @@
 #pragma once
 #include "Engine//GameObject.h"
-class tankHead :
+class Enemy :
     public GameObject
 {
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	tankHead(GameObject* parent);
+	Enemy(GameObject* parent);
 	//デストラクタ
-	~tankHead(){}
+	~Enemy() {}
 	//初期化
 	void Initialize() override;
 
@@ -20,8 +20,9 @@ public:
 
 	//開放
 	void Release() override;
+	float GetRadius() const { return radius_; }
 private:
 	int hModel_;
-	int camType_;//カメラの種類
+	float radius_ = 1.0f;
 };
 

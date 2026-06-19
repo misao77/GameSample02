@@ -4,6 +4,7 @@
 #include "Engine//Debug.h"
 #include "Ground.h"
 #include "Engine//Camera.h"
+#include "tankHead.h"
 
 namespace
 {
@@ -27,6 +28,7 @@ Tank::Tank(GameObject* parent)
 
 void Tank::Initialize()
 {
+	Instantiate<tankHead>(this);
 	hModel_ = Model::Load("TankBody.fbx");
 	assert(hModel_ >= 0);
 }
@@ -86,20 +88,25 @@ void Tank::Update()
 
 	//Aキーを押している間、左に回転する
 	//Dキーを押している間、右に回転する
-	if (Input::IsKey(DIK_LEFT) || Input::IsKey(DIK_A)) 
+	if (Input::IsKey(DIK_A)) 
 	{
-		transform_.rotate_.y -= 1.0f;
+		transform_.rotate_.y -= 2.0f;
 	}
-	if (Input::IsKey(DIK_RIGHT) || Input::IsKey(DIK_D))
+	if (Input::IsKey(DIK_D))
 	{
-		transform_.rotate_.y += 1.0f;
+		transform_.rotate_.y += 2.0f;
 	}
 	Debug::Log("CAMTYPE = ");
 	Debug::Log(camType_, true);//後のtrueは改行
 	//Wキーを押している間、前に進む
-	if (Input::IsKey(DIK_UP) || Input::IsKey(DIK_W))
+	if (Input::IsKey(DIK_W))
 	{
 		vPos = vPos + moveSpeed * vMove;
+		XMStoreFloat3(&transform_.position_, vPos);
+	}
+	if (Input::IsKey(DIK_S))
+	{
+		vPos = vPos - moveSpeed * vMove;
 		XMStoreFloat3(&transform_.position_, vPos);
 	}
 

@@ -1,14 +1,13 @@
 #pragma once
 #include "Engine//GameObject.h"
-class tankHead :
+class Bullet :
     public GameObject
 {
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	tankHead(GameObject* parent);
-	//デストラクタ
-	~tankHead(){}
+	Bullet(GameObject* parent);
+	~Bullet() {}//インライン定義
 	//初期化
 	void Initialize() override;
 
@@ -20,8 +19,11 @@ public:
 
 	//開放
 	void Release() override;
+	void SetMoveVector(const XMFLOAT3& move) { move_ = move; }
+	float GetRadius() const { return radius_; }
 private:
 	int hModel_;
-	int camType_;//カメラの種類
+	XMFLOAT3 move_;//弾の進行方向
+	float radius_ = 1.0f;
 };
 
