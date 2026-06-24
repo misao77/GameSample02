@@ -21,6 +21,7 @@ public:
 	//開放
 	void Release() override;
 	float GetRadius() const { return radius_; }
+	void OnCollision(GameObject* other) override;
 private:
 	int hModel_;
 	float radius_ = 1.0f;

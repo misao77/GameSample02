@@ -11,6 +11,8 @@ void Bullet::Initialize()
 {
 	hModel_ = Model::Load("Bullet.fbx");
 	assert(hModel_ >= 0);
+	SphereCollider* collider = new SphereCollider({ 0,0,0 }, 1.0f);//半径0.5の球体
+	AddCollider(collider);//当たり判定をBulletに追加する
 }
 
 void Bullet::Update()
@@ -22,6 +24,10 @@ void Bullet::Update()
 	vPos = vPos + vMove;//弾の進行方向に移動する
 	XMStoreFloat3(&transform_.position_, vPos);//ストア：書き込み
 
+	if (transform_.position_.y < -50.0f)
+	{
+		KillMe();
+	}
 }
 
 void Bullet::Draw()

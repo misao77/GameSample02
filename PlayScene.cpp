@@ -13,7 +13,10 @@ void PlayScene::Initialize()
 {
 	Instantiate<Ground>(this);//親をplaysceneにして地面を生成
 	Instantiate<Tank>(this);
-	Instantiate<Enemy>(this);
+	for (int i = 0; i < 5; i++)
+	{
+		Instantiate<Enemy>(this);
+	}
 }
 
 void PlayScene::Update()
