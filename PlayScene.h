@@ -1,5 +1,8 @@
 #pragma once
 #include "Engine//GameObject.h"
+#include <vector>
+
+class Enemy;
 class PlayScene :
     public GameObject
 {
@@ -19,5 +22,7 @@ public:
 
 	//開放
 	void Release() override;
+private:
+	std::vector<Enemy*>enemies_;
 };
 
