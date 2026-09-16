@@ -3,6 +3,7 @@
 #include "Engine//Input.h"
 #include "Bullet.h"
 #include "Ground.h"
+#include "PlayScene.h"
 
 Enemy::Enemy(GameObject* parent)
 	: GameObject(parent, "Enemy"), hModel_(-1)
@@ -18,8 +19,9 @@ void Enemy::Initialize()
 	SphereCollider* collider = new SphereCollider({ 0,0,0 }, 0.5f);//半径0.5の球体
 	AddCollider(collider);//当たり判定をBulletに追加する
 
-	float x = (rand() / RAND_MAX) * 5.0f - 10.0f;
-	float z = (rand() / RAND_MAX) * 5.0f - 10.0f;
+	float x = (float)rand() / RAND_MAX * 30.0f - 10.0f;
+	float z = (float)rand() / RAND_MAX * 30.0f - 10.0f;
+
 	SetPosition(x, 0, z);
 	
 	
@@ -60,6 +62,16 @@ void Enemy::OnCollision(GameObject* pTarget)
 	if (pBullet)
 	{
 		pBullet->KillMe();
+
+		PlayScene* pScene =
+			dynamic_cast<PlayScene*>(GetParent());
+
+		if (pScene)
+		{
+			pScene->AddScore();
+			pScene->SpawnEnemy();
+		}
+
 		KillMe();
 	}
 }

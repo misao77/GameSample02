@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine//GameObject.h"
+#include "Engine/Text.h"
 #include <vector>
 
 class Enemy;
@@ -11,18 +12,17 @@ public:
 	//引数：parent  親オブジェクト（SceneManager）
 	PlayScene(GameObject* parent);
 
-	//初期化
 	void Initialize() override;
-
-	//更新
 	void Update() override;
-
-	//描画
 	void Draw() override;
-
-	//開放
 	void Release() override;
+
+	void SpawnEnemy();
+	void AddScore();
+
 private:
 	std::vector<Enemy*>enemies_;
+	Text text_;
+	int score_ = 0;
 };
 
